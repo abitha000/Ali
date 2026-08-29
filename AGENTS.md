@@ -231,7 +231,9 @@ behind "don't hand-edit BotVersion."
 ### `docs.yml` (path-filtered to docs/alita/scripts/locales)
 
 `make generate-docs` → Node 22 + Bun → `bun run build` → deploy to **Cloudflare
-Workers** via `wrangler@4` (only on push to `main`). Tag pushes do not run
+Workers** via `wrangler@4` (only on push to `main` **when both**
+`CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets are set; otherwise the
+deploy step is skipped with a notice). Tag pushes do not run
 `ci.yml`, but `release.yml` independently repeats the migration, race/coverage,
 translation, and docs gates before publishing.
 
