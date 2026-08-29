@@ -381,9 +381,9 @@ func (cfg *Config) setDefaults() {
 	if cfg.WorkingMode == "" {
 		cfg.WorkingMode = "worker"
 	}
-	if cfg.RedisAddress == "" {
-		cfg.RedisAddress = "localhost:6379"
-	}
+	if cfg.RedisAddress == "" && !cfg.DisableCache {
+    return
+    }
 	if cfg.RedisDB == 0 && os.Getenv("REDIS_DB") != "0" {
 		cfg.RedisDB = 1
 	}
