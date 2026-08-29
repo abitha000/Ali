@@ -57,7 +57,8 @@ type AdminCache struct {
 // with caching disabled (all DB reads go direct, antiraid/join state degrades to in-memory).
 func InitCache() error {
 	if config.AppConfig != nil && config.AppConfig.DisableCache {
-		log.Warn("[Cache] DISABLE_CACHE=true — bypassing read-through cache; every DB read will hit Postgres directly")
+		log.Warn("[Cache] DISABLE_CACHE=true — Redis disabled")
+		return nil
 	}
 	options, err := newRedisOptions(config.AppConfig)
 	if err != nil {
